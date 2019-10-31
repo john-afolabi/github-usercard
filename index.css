@@ -131,6 +131,7 @@ body {
 .card {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .card-prof {
@@ -141,3 +142,13 @@ body {
   width: 100%;
 }
 
+.close-card {
+  display: none;
+}
+
+.expand {
+  position: absolute;
+  cursor: pointer;
+  right: 10px;
+  top: 10px;
+}
