@@ -32,19 +32,35 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = ['jasynmarais', 'Godnoken', 'AbelTedros', 'AbdelIdir', 'ola-dola', 'john-afolabi'];
+// const followersArray = ['jasynmarais', 'Godnoken', 'AbelTedros', 'AbdelIdir', 'ola-dola', 'john-afolabi'];
+const followersArray = [];
 
-followersArray.forEach(user => {
-  axios.get(`https://api.github.com/users/${user}`)
+axios
+  .get(`https://api.github.com/users/john-afolabi`)
   .then(response => {
-    console.log(response);
-    const cards = document.querySelector('.cards');
-    cards.append(createGitCard(response.data))
+    return axios.get(response.data.followers_url);
+  })
+  .then(response => {
+    response.data.forEach(user => {
+      axios
+        .get(`https://api.github.com/users/${user.login}`)
+        .then(response => {
+          console.log(response);
+          const cards = document.querySelector(".cards");
+          cards.append(createGitCard(response.data));
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    });
   })
   .catch(error => {
     console.log(error);
   });
-});
+
+// followersArray.forEach(user => {
+
+// });
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -67,23 +83,23 @@ followersArray.forEach(user => {
 */
 
 function createGitCard(obj) {
-  const card = document.createElement('div');
-  const img = document.createElement('img');
-  const cardInfo = document.createElement('div');
-  const name = document.createElement('h3');
-  const username = document.createElement('p');
-  const location = document.createElement('p');
-  const profile = document.createElement('p');
-  const linktoGit = document.createElement('a');
-  const followers = document.createElement('p');
-  const following = document.createElement('p');
-  const bio = document.createElement('p');
+  const card = document.createElement("div");
+  const img = document.createElement("img");
+  const cardInfo = document.createElement("div");
+  const name = document.createElement("h3");
+  const username = document.createElement("p");
+  const location = document.createElement("p");
+  const profile = document.createElement("p");
+  const linktoGit = document.createElement("a");
+  const followers = document.createElement("p");
+  const following = document.createElement("p");
+  const bio = document.createElement("p");
 
   img.src = obj.avatar_url;
   name.textContent = obj.name;
   username.textContent = obj.login;
   location.textContent = `Location: ${obj.location}`;
-  profile.innerText = 'Profile: '
+  profile.innerText = "Profile: ";
   linktoGit.href = obj.html_url;
   linktoGit.textContent = obj.html_url;
   followers.textContent = `Followers: ${obj.followers}`;
@@ -94,13 +110,13 @@ function createGitCard(obj) {
   cardInfo.append(name, username, location, profile, followers, following, bio);
   profile.append(linktoGit);
 
-  card.classList.add('card');
-  cardInfo.classList.add('card-info');
-  name.classList.add('name');
-  username.classList.add('username');
+  card.classList.add("card");
+  cardInfo.classList.add("card-info");
+  name.classList.add("name");
+  username.classList.add("username");
 
   console.log(linktoGit);
-  
+
   return card;
 }
 
