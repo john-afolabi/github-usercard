@@ -86,17 +86,21 @@ function createGitCard(obj) {
   img.src = obj.avatar_url;
   name.textContent = obj.name;
   username.textContent = obj.login;
-  location.textContent = obj.location;
+  location.textContent = `Location: ${obj.location}`;
+  // profile.innerText = 'Profile:'
   linktoGit.href = obj.html_url;
-  followers.textContent = obj.followers;
-  following.textContent = obj.following;
-  bio.textContent = obj.bio;
+  linktoGit.textContent = obj.html_url;
+  followers.textContent = `Followers: ${obj.followers}`;
+  following.textContent = `Following: ${obj.following}`;
+  bio.textContent = `Bio: ${obj.bio}`;
 
   card.classList.add('card');
   cardInfo.classList.add('card-info');
   name.classList.add('name');
   username.classList.add('username');
 
+  console.log(linktoGit);
+  
   return card;
 }
 
