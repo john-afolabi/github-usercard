@@ -84,6 +84,7 @@ axios
 
 function createGitCard(obj) {
   const card = document.createElement("div");
+  const cardProf = document.createElement("div");
   const img = document.createElement("img");
   const cardInfo = document.createElement("div");
   const name = document.createElement("h3");
@@ -94,6 +95,7 @@ function createGitCard(obj) {
   const followers = document.createElement("p");
   const following = document.createElement("p");
   const bio = document.createElement("p");
+  const calender = document.createElement("img")
 
   img.src = obj.avatar_url;
   name.textContent = obj.name;
@@ -105,8 +107,10 @@ function createGitCard(obj) {
   followers.textContent = `Followers: ${obj.followers}`;
   following.textContent = `Following: ${obj.following}`;
   bio.textContent = `Bio: ${obj.bio}`;
+  calender.src = `http://ghchart.rshah.org/${obj.login}`
 
-  card.append(img, cardInfo);
+  card.append(cardProf, calender);
+  cardProf.append(img, cardInfo);
   cardInfo.append(name, username, location, profile, followers, following, bio);
   profile.append(linktoGit);
 
@@ -114,6 +118,8 @@ function createGitCard(obj) {
   cardInfo.classList.add("card-info");
   name.classList.add("name");
   username.classList.add("username");
+  calender.classList.add("calender-img");
+  cardProf.classList.add("card-prof");
 
   console.log(linktoGit);
 

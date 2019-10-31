@@ -101,7 +101,7 @@ body {
   margin-bottom: 30px;
 }
 
-.card img {
+.card-prof img {
   width: 150px;
   height: 150px;
   border-radius: 3px;
@@ -123,5 +123,21 @@ body {
   margin: 3px 0 10px;
 }
 
+.calender-img {
+  width: auto;
+  margin-top: 30px;
+}
 
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-prof {
+  display: flex;
+}
+
+.calender-img {
+  width: 100%;
+}
 
